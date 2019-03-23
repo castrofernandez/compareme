@@ -1,7 +1,7 @@
 'use strict';
 
-const compareme = {
+import is from './is';
 
+export default {
+  is,
 };
-
-export default compareme;
