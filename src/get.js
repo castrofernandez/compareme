@@ -9,7 +9,7 @@ const createInstance = (value, options = {}) => {
   };
 
   defineProperties(instance, {
-    difference: () => instance,
+    differences: () => instance,
     deeply: () => createInstance(value, {...options, deep: true}),
     strictly: () => createInstance(value, {...options, strict: true}),
   });
