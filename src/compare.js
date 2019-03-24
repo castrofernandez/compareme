@@ -18,14 +18,19 @@ const getResult = (type1, type2, index) => ({
   differences: getDifference(type1, type2, index),
 });
 
-const compare = (obj1, obj2, options = {}, index) => {
+const mustGoDeep = (level, {deep = false}) => deep || level === 1;
+
+const compare = (obj1, obj2, options = {}, level = 1, index) => {
   const type1 = whatsme.whats(obj1);
   const type2 = whatsme.whats(obj2);
+  const result = getResult(type1, type2, index);
 
-  return mergeResult(
-      getResult(type1, type2, index),
-      getComparator(type1)(options, index).compare(obj1, obj2)
-  );
+  return mustGoDeep(level, options)
+    ? mergeResult(
+        result,
+        getComparator(type1)(options, level, index).compare(obj1, obj2)
+    )
+    : result;
 };
 
 const comparators = {

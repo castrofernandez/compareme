@@ -82,4 +82,22 @@ describe('array', function() {
       }],
     });
   });
+
+  it('get.deeply.strictly.with', async function() {
+    expect(compareme.get([10, [20]]).strictly.difference.with([5, ['10']])).to.deep.equal({
+      success: true,
+      differences: [],
+    });
+  });
+
+  it('get.deeply.strictly.difference.with', async function() {
+    expect(compareme.get([10, [20]]).deeply.strictly.difference.with([5, ['10']])).to.deep.equal({
+      success: false,
+      differences: [{
+        index: '1.0',
+        first: 'number',
+        second: 'string',
+      }],
+    });
+  });
 });

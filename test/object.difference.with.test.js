@@ -65,6 +65,24 @@ describe('object', function() {
     });
   });
 
+  it('get.strictly.difference.with', async function() {
+    expect(compareme.get({a: 0, b: {c: 1}}).strictly.difference.with({a: 1, b: {c: 's'}})).to.deep.equal({
+      success: true,
+      differences: [],
+    });
+  });
+
+  it('get.strictly.deeply.difference.with', async function() {
+    expect(compareme.get({a: 0, b: {c: 1}}).strictly.deeply.difference.with({a: 1, b: {c: 's'}})).to.deep.equal({
+      success: false,
+      differences: [{
+        index: 'b.c',
+        first: 'number',
+        second: 'string',
+      }],
+    });
+  });
+
   it('get.deeply.difference.with', async function() {
     expect(compareme.get({a: 1, b: 2}).deeply.difference.with({a: 2, b: 3})).to.deep.equal({
       success: true,

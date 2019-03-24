@@ -2,7 +2,7 @@
 
 import {emptyResult as empty, mergeResult as merge} from './empty.comparator';
 
-const objectComparator = (comparator) => (options, index) => {
+const objectComparator = (comparator) => (options, level, index) => {
   return {
     compare: (o1, o2) => {
       const o1Keys = Object.keys(o1);
@@ -11,7 +11,9 @@ const objectComparator = (comparator) => (options, index) => {
 
       const ind = (key) => index ? `${index}.${key}` : key.toString();
 
-      const compKey = (key) => comparator(o1[key], o2[key], options, ind(key));
+      const compKey = (key) => {
+        return comparator(o1[key], o2[key], options, level + 1, ind(key));
+      };
 
       const compareByKeys = (keys) => {
         return keys.reduce((result, key) => {

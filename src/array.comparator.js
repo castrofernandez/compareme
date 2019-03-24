@@ -5,7 +5,7 @@ import {emptyResult as empty, mergeResult as merge} from './empty.comparator';
 const range = (start, end) => Array(start > end ? 0 : end - start)
     .fill().map((_, index) => start + index);
 
-const arrayComparator = (comparator) => (options, index) => {
+const arrayComparator = (comparator) => (options, level, index) => {
   return {
     compare: (a1, a2) => {
       const getMinLength = () => Math.min(a1.length, a2.length);
@@ -18,7 +18,9 @@ const arrayComparator = (comparator) => (options, index) => {
 
       const ind = (i) => index ? `${index}.${i}` : i.toString();
 
-      const comparePos = (i) => comparator(getA1(i), getA2(i), options, ind(i));
+      const comparePos = (i) => {
+        return comparator(getA1(i), getA2(i), options, level + 1, ind(i));
+      };
 
       const compareSection = (start, end) => {
         return range(start, end).reduce((result, i) => {
