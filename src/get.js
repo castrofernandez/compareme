@@ -4,14 +4,12 @@ import compare from './compare';
 import {defineProperties} from './properties';
 
 const createInstance = (value, options = {}) => {
-  const {comparison = true} = options;
-
   const instance = {
-    like: (obj) => comparison === compare(value, obj, options).success,
+    with: (obj) => compare(value, obj, options),
   };
 
   defineProperties(instance, {
-    not: () => createInstance(value, {...options, comparison: !comparison}),
+    difference: () => instance,
     deeply: () => createInstance(value, {...options, deep: true}),
     strictly: () => createInstance(value, {...options, strict: true}),
   });
@@ -19,6 +17,6 @@ const createInstance = (value, options = {}) => {
   return instance;
 };
 
-const is = (obj) => createInstance(obj);
+const get = (obj) => createInstance(obj);
 
-export default is;
+export default get;
