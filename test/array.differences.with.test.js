@@ -91,7 +91,7 @@ describe('array', function() {
   });
 
   it('get.deeply.strictly.differences.with', async function() {
-    expect(compareme.get([10, [20]]).deeply.strictly.differences.with([5, ['10']])).to.deep.equal({
+    expect(compareme.get([10, [20]]).deeply.and.strictly.differences.with([5, ['10']])).to.deep.equal({
       success: false,
       differences: [{
         index: '1.0',

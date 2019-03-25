@@ -15,7 +15,7 @@ import compareme from 'compareme';
 compareme.is({a: 1}).like({a: 2}); // true
 compareme.is({a: 1, b: 2}).deeply.like({a: 3}) // true
 compareme.is({a: 1}).strictly.like({a: 2, b: 3}) // false
-compareme.get([10]).deeply.difference.with(['Something']);
+compareme.get([10]).strictly.and.deeply.difference.with(['Something']);
 /*
 {
     success: false,
@@ -25,6 +25,18 @@ compareme.get([10]).deeply.difference.with(['Something']);
         second: 'string',
     }],
 }
+*/
+compareme.get({a: 1, b: {c: 2}}).unexpected.elements.strictly.and.deeply.with({a: 2, b: {d: 's'}});
+/*
+[{
+    index: 'b.d',
+    first: 'undefined',
+    second: 'string',
+}]
+
+compareme.get({a: 1, b: {c: 2}}).missing.elements.strictly.and.deeply.with({a: 2, b: {d: 's'}});
+
+compareme.get({a: 1, b: {c: 2}}).type.differences.strictly.and.deeply.with({a: 2, b: {c: 's'}});
 */
 ```
 
@@ -54,6 +66,7 @@ npm test
   * not: negates the condition.
   * deeply: checks first object deeply. Values in second object could not exist.
   * strictly: checks first object deeply and values must match. Second object could not have different values.
+  * and
 
 * Finish methods:
   * like: compares the type of each pair of objects.

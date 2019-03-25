@@ -14,6 +14,7 @@ const createInstance = (value, options = {}) => {
     not: () => createInstance(value, {...options, comparison: !comparison}),
     deeply: () => createInstance(value, {...options, deep: true}),
     strictly: () => createInstance(value, {...options, strict: true}),
+    and: () => instance,
   });
 
   return instance;

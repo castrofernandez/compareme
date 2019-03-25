@@ -72,8 +72,8 @@ describe('object', function() {
     });
   });
 
-  it('get.strictly.deeply.differences.with', async function() {
-    expect(compareme.get({a: 0, b: {c: 1}}).strictly.deeply.differences.with({a: 1, b: {c: 's'}})).to.deep.equal({
+  it('get.strictly.and.deeply.differences.with', async function() {
+    expect(compareme.get({a: 0, b: {c: 1}}).strictly.and.deeply.differences.with({a: 1, b: {c: 's'}})).to.deep.equal({
       success: false,
       differences: [{
         index: 'b.c',
